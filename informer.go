@@ -3,8 +3,10 @@ package main
 import (
 	"time"
 
-	"github.com/martin-helmich/kubernetes-crd-example/api/types/v1alpha1"
 	client_v1alpha1 "github.com/martin-helmich/kubernetes-crd-example/clientset/v1alpha1"
+
+	"github.com/martin-helmich/kubernetes-crd-example/api/types/v1alpha1"
+
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/wait"
@@ -16,10 +18,10 @@ func WatchResources(clientSet client_v1alpha1.ExampleV1Alpha1Interface) cache.St
 	projectStore, projectController := cache.NewInformer(
 		&cache.ListWatch{
 			ListFunc: func(lo metav1.ListOptions) (result runtime.Object, err error) {
-				return clientSet.Projects("some-namespace").List(lo)
+				return clientSet.Projects("default").List(lo)
 			},
 			WatchFunc: func(lo metav1.ListOptions) (watch.Interface, error) {
-				return clientSet.Projects("some-namespace").Watch(lo)
+				return clientSet.Projects("default").Watch(lo)
 			},
 		},
 		&v1alpha1.Project{},

@@ -5,7 +5,8 @@ package v1alpha1
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 type ProjectSpec struct {
-	Replicas int `json:"replicas"`
+	Replicas    int    `json:"replicas"`
+	ServiceName string `json:"servicename"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
